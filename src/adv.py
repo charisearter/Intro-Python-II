@@ -1,4 +1,5 @@
 from room import Room
+from player import Player
 
 # Declare all the rooms
 
@@ -36,12 +37,18 @@ room['treasure'].s_to = room['narrow']
 #
 # Main
 #
-
+directions = ['n', 's', 'e', 'w', 'q']
 # Make a new player object that is currently in the 'outside' room.
 
+player = Player(room['outside'])
 # Write a loop that:
 #
-# * Prints the current room name
+while True:
+    # * Prints the current room name
+    location = player.location
+    print(f'You are in the {location.name}. {location.description}')
+    print('Where do you want to go?')
+    cmd = input('In which direction do you want to go?: ')
 # * Prints the current description (the textwrap module might be useful here).
 # * Waits for user input and decides what to do.
 #
@@ -49,3 +56,29 @@ room['treasure'].s_to = room['narrow']
 # Print an error message if the movement isn't allowed.
 #
 # If the user enters "q", quit the game.
+    if cmd == 'q':
+        break
+    elif cmd.lower() == 'n':
+        if hasattr(location, 'n_to'):
+            print('You chose North')
+            player.location = location.n_to
+        else:
+            print('An invisible barrier blocks your path. Choose another direction.')
+    elif cmd.lower() == 's':
+        if hasattr(location, 's_to'):
+            print('You chose South')
+            player.location = location.s_to
+        else:
+            print('An invisible barrier blocks your path. Choose another direction.')
+    elif cmd.lower() == 'e':
+        if hasattr(location, 'e_to'):
+            print('You chose East')
+            player.location = location.e_to
+        else:
+            print('An invisible barrier blocks your path. Choose another direction.')
+    elif cmd.lower() == 'w':
+        if hasattr(location, 'w_to'):
+            print('You chose West')
+            player.location = location.w_to
+        else:
+            print('An invisible barrier blocks your path. Choose another direction.')
