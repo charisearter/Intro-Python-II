@@ -7,7 +7,7 @@
 
 class Player:
 
-    def __init__(self, location, backpack):
+    def __init__(self, location, inventory=None):
 
         self.location = location
-        self.backpack = backpack
+        self.inventory = inventory or []

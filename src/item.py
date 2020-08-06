@@ -11,35 +11,42 @@ class Inventory:
         self.items = dict()
 
     def __str__(self):
-        return f" {description}, holds {capacity} items"
+        return f" {self.description}, holds {self.capacity} items"
 
 
-class Item:
+class Items:
 
     def __init__(self, group, name, description):
         self.group = group  # kind of item
-        self.name
-        self.description
+        self.name = name
+        self.description = description
 
     def __str__(self):
-        return f"A {name}: {description}"
+        return f"A {self.name}: {self.description}"
 
 # make item objects
 
 
-brass_knuckles = Item('weapon', 'Brass Knuckles',
-                      'A pair of brass knuckles to protect your fingers and give your punches extra power.')
+pockets = Inventory('storage', 'Your pockets',
+                    'You can only hold a couple of things in your jean pockets. They aren\'t that deep.', 2)
 
-hp_potion = Item('healing', 'Health Potion',
-                 'A vial of red liquid that is said to heal your HP completely.')
+backpack = Inventory('storage', 'A small backpack',
+                     'You can carry a few more items with this.', 7)
 
-mp_potion = Item('healing', 'Magic Potion',
-                 'A vial of blue liquid that is said to heal your MP completely')
+brass_knuckles = Items('weapon', 'Brass Knuckles',
+                       'A pair of brass knuckles to protect your fingers and give your punches extra power.')
 
-antidote = Item('healing', 'Antidote',
-                'Cures you of poison. Does nothing for your HP though.')
+hp_potion = Items('healing', 'Health Potion',
+                  'A vial of red liquid that is said to heal your HP completely.')
 
-book = Item('skill', 'Old book',
-            'An old worn book. Looks to be a sort of manuel of some kind.')
+mp_potion = Items('healing', 'Magic Potion',
+                  'A vial of blue liquid that is said to heal your MP completely')
 
-sm_backpack = Item('storage', 'A small backpack', 'You can carry a couple more items with this.')
+antidote = Items('healing', 'Antidote',
+                 'Cures you of poison. Does nothing for your HP though.')
+
+book = Items('skill', 'Old book',
+             'An old worn book. Looks to be a sort of manuel of some kind.')
+
+escape = Items('exit', 'Escape',
+               'If used, teleports the person outside to a safe location.')
