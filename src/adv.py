@@ -1,3 +1,4 @@
+# from file name import Class
 from room import Room
 from player import Player
 
@@ -5,7 +6,7 @@ from player import Player
 
 room = {
     'outside':  Room("Outside Cave Entrance",
-                     "North of you, the cave mount beckons"),
+                     "North of you, the cave mount beckons..."),
 
     'foyer':    Room("Foyer", """Dim light filters in from the south. Dusty
 passages run north and east."""),
@@ -22,6 +23,8 @@ chamber! Sadly, it has already been completely emptied by
 earlier adventurers. The only exit is to the south."""),
 }
 
+#Declare all items
+
 
 # Link rooms together
 
@@ -33,11 +36,14 @@ room['overlook'].s_to = room['foyer']
 room['narrow'].w_to = room['foyer']
 room['narrow'].n_to = room['treasure']
 room['treasure'].s_to = room['narrow']
-
 #
+
+# Add Items to room 
+
 # Main
 #
-directions = ['n', 's', 'e', 'w', 'q']
+directions = ['n', 's', 'e', 'w', 'q',
+              'north', 'south', 'east', 'west', 'quit']
 # Make a new player object that is currently in the 'outside' room.
 
 player = Player(room['outside'])
@@ -46,9 +52,12 @@ player = Player(room['outside'])
 while True:
     # * Prints the current room name
     location = player.location
-    print(f'You are in the {location.name}. {location.description}')
-    print('Where do you want to go?')
-    cmd = input('In which direction do you want to go?: ')
+    print('\n ****************************** \n')
+    print('\n game info blurb here \n')
+    print('\n ****************************** \n')
+    print(f'You are in the {location.name}. {location.description}\n')
+    print('Where do you want to go? What do you want to do? \n')
+    cmd = input('Pick an action or direction: ')
 # * Prints the current description (the textwrap module might be useful here).
 # * Waits for user input and decides what to do.
 #
@@ -56,27 +65,28 @@ while True:
 # Print an error message if the movement isn't allowed.
 #
 # If the user enters "q", quit the game.
-    if cmd == 'q':
+
+    if cmd == 'q' or 'quit':
         break
-    elif cmd.lower() == 'n':
-        if hasattr(location, 'n_to'):
+    elif cmd.lower() == 'n' or 'north':
+        if hasattr(location, 'n_to'):  # hasattr lookes to see if something has the attribute
             print('You chose North')
             player.location = location.n_to
         else:
             print('An invisible barrier blocks your path. Choose another direction.')
-    elif cmd.lower() == 's':
+    elif cmd.lower() == 's' or 'south':
         if hasattr(location, 's_to'):
             print('You chose South')
             player.location = location.s_to
         else:
             print('An invisible barrier blocks your path. Choose another direction.')
-    elif cmd.lower() == 'e':
+    elif cmd.lower() == 'e' or 'east':
         if hasattr(location, 'e_to'):
             print('You chose East')
             player.location = location.e_to
         else:
             print('An invisible barrier blocks your path. Choose another direction.')
-    elif cmd.lower() == 'w':
+    elif cmd.lower() == 'w' or 'west':
         if hasattr(location, 'w_to'):
             print('You chose West')
             player.location = location.w_to
