@@ -4,7 +4,6 @@
 
 # add backpack for player to hold items
 # backpack should have item limit
-
 class Player:
 
     def __init__(self, location, inventory=None):

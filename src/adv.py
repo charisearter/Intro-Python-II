@@ -70,13 +70,9 @@ while True:
 # Print an error message if the movement isn't allowed.
 #
 # If the user enters "q", quit the game.
-'''
-User Enters Commands
-
-'''
-if cmd.lower().strip() in ('q', 'quit'):  # strip() strips any accidental whitespace user may type
+    if cmd.lower().strip() in ('q', 'quit'):  # strip() strips any accidental whitespace user may type
         break
-    elif cmd.lower().strip() in ('n', 'north'):  #if user inputs one of the choices in the tuple
+    elif cmd.lower().strip() in ('n', 'north'):  # if user inputs one of the choices in the tuple
         if hasattr(location, 'n_to'):  # hasattr looks to see if something has the attribute
             print('You chose North')
             player.location = location.n_to
