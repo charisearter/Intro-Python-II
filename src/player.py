@@ -11,3 +11,12 @@ class Player:
 
         self.location = location
         self.inventory = inventory or []
+
+    def has_item(self):
+        pass
+
+    def pickup(self, item):
+        pass
+
+    def drop(self, item):
+        pass
