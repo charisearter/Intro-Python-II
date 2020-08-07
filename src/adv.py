@@ -1,14 +1,15 @@
 # from file name import Class
 from room import Room
 from player import Player
-# import all from file
 import item
+# import all from file
+
 
 # Declare all the rooms
 
 room = {
     'outside':  Room("Outside Cave Entrance",
-                     "North of you, the cave mount beckons...", [item.backpack, item.flashlight], True),
+                     "North of you, the cave mount beckons...", [item.flashlight], True),
 
     'foyer':    Room("Foyer", """Dim light filters in from the south. Dusty
 passages run north and east.""", [item.book, item.escape], True),
@@ -45,11 +46,11 @@ room['treasure'].s_to = room['narrow']
 # Main
 #
 directions = ['n', 's', 'e', 'w', 'q',
-              'north', 'south', 'east', 'west', 'quit']
+              'north', 'south', 'east', 'west', 'quit', 'take', 'drop']
 # Make a new player object that is currently in the 'outside' room.
 
 player = Player(room['outside'], [])
-player.inventory = item.pockets
+player.inventory = item.backpack
 # Write a loop that:
 #
 while True:
@@ -60,7 +61,7 @@ while True:
     print('\n ****************************** \n')
     print(
         f'\nYou are in the {location.name}. {location.description}\n There are {len(location.contents)} item(s) in the room.\n')
-    print(f'{player.inventory.name} can hold {player.inventory.capacity} items.\n')
+    player.check_inventory()
     print('\nWhere do you want to go? What do you want to do? \n')
     cmd = input('Pick an action or direction: ')
 # * Prints the current description (the textwrap module might be useful here).
@@ -72,6 +73,14 @@ while True:
 # If the user enters "q", quit the game.
     if cmd.lower().strip() in ('q', 'quit'):  # strip() strips any accidental whitespace user may type
         break
+    elif cmd.lower().strip() in ('take', 'drop'):
+        if cmd.lower().strip() == 'take':
+            for items in location.contents:
+                player.pickup(items)
+        elif cmd.lower().strip() == 'drop':
+            player.drop()
+            print('You decided to leave the loot.')
+
     elif cmd.lower().strip() in ('n', 'north'):  # if user inputs one of the choices in the tuple
         if hasattr(location, 'n_to'):  # hasattr looks to see if something has the attribute
             print('You chose North')

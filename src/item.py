@@ -2,18 +2,14 @@
 
 class Inventory:
 
-    def __init__(self, group, name, description, capacity):
+    def __init__(self, group, name, description):
         self.name = name
         self.group = group
         self.description = description
-        self.capacity = capacity
-        self.full = False  # set to true if capacity is maxed out
-        self.items = dict()
+        self.items = []
 
     def __str__(self):
-        return f" {self.description}, holds {self.capacity} items"
-
-    ''' check if inventory is full depending on item '''
+        return f" {self.description}, holds items."
 
 
 class Items:
@@ -28,19 +24,10 @@ class Items:
         return f"{self.name}: {self.description}"
 
 
-class Quest(Items):
-    def __init__(self, group, name, description, quest, sell=False):
-        self.sell = sell
-        super().__init__(group, name, description, quest=True)
-
-    def __str__(self):
-        return " {0.name}: {0.description}".format(self)
-
-
-pockets = Inventory('storage', 'Your pockets', 'They aren\'t that deep.', 2)
+pockets = Inventory('storage', 'Your pockets', 'They aren\'t that deep.')
 
 backpack = Inventory('storage', 'A small backpack',
-                     'You can carry a few more items with this.', 7)
+                     'You can carry a few more items with this.')
 
 brass_knuckles = Items('weapon', 'Brass Knuckles',
                        'A pair of brass knuckles to protect your fingers and give your punches extra power.')
